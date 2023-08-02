@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Gereja Sidang Jemaat Allah Pemuridan</title>
+  <link rel="icon" type="image/x-icon"
+    href="{{url_for('static', filename='/images/logo/Logo_Gereja_Sidang-Sidang_Jemaat_Allah.ico')}}" />
+  <!-- Core theme CSS (Bootstrap 5.0.2)-->
+  <link href="/static/assets/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <!-- Font Awesome 6.3.0-->
+  <link rel="stylesheet" href="/static/assets/fontawesome@6.3.0/css/all.min.css" crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="/static/assets/css/style.css" />
+  <!-- Font Poppins -->
+  <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet" />
+  <!-- Font Sofia -->
+  <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+  <!-- W3School CSS -->
+  <link rel="stylesheet" href="/static/assets/css/w3school/w3.css">
+  <!-- Jquery 3.5.1 -->
+  <script src="/static/assets/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Bootstrap core JS-->
+  <script src="/static/assets/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Jquery 1.9.1 -->
+  <script src="/static/assets/jquery/1.9.1/jquery.min.js"></script>
+  <!-- Jquery 2.1.1 -->
+  <script src="/static/assets/jquery/2.1.1/jquery.min.js"></script>
+  <!-- Gallery Style CSS -->
+  <link rel="stylesheet" href="/static/assets/css/fancybox/style.css">
+  <!-- Demo CSS (No need to include it into your project) -->
+  <link rel="stylesheet" href="/static/assets/css/fancybox/demo.css">
+  <!-- Fancybox CSS -->
+  <link rel='stylesheet' href='/static/assets/jquery/fancybox/jquery.fancybox.min.css'>
+  {# TinyMCE #}
+  <script src="/static/assets/js/tinymce/tinymce.min.js"></script>
+  {#
+  <script>
+    tinymce.init({
+      selector: "#text-editor",
+    });
+  </script> #}
+  {# plugins: "accordion advlist anchor autolink autoresize autosave charmap code codesample directionality emoticons
+  fullscreen help image importcss insertdatetime link lists media nonbreaking pagebreak preview quickbars save
+  searchreplace table template visualblocks visualchars wordcount", #}
+  {# CKeditor #}
+  <script src="/static/assets/js/ckeditor5-classic/ckeditor.js"></script>
+  {# SweetAlert2 #}
+  <script src="/static/assets/js/sweetalert2/script.js"></script>
+
+</head>
+
+<body class="w3-animate-opacity">
+  <!-- PreLoader -->
+  <div id="overlayer"></div>
+  <span class="loader">
+    <span class="loader-inner"></span>
+  </span>
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-secondary pe-5 ps-5 fade-in">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+        aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand w3-animate-bottom" href="/">
+          <img src="/static/images/logo/Logo_Gereja_Sidang-Sidang_Jemaat_Allah.png" alt="" width="65" height="65"
+            style="background-color: aliceblue; border-radius: 10%" />
+        </a>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link {{ 'active' if (title=='beranda')}}" aria-current="page" href="/">Beranda</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle {{ 'active' if (title=='pengakuan_iman') or (title=='pengakuan_iman_rasuli') or (title=='struktur_organisasi') or (title=='sejarah_gereja')}}"
+              href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Tentang
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item {{'activeDrop' if (title=='pengakuan_iman_rasuli')}}"
+                  href="/pengakuan_iman_rasuli">Pengakuan Iman Rasuli</a>
+              </li>
+              <li>
+                <a class="dropdown-item {{'activeDrop' if (title=='pengakuan_iman')}}" href="/pengakuan_iman">Pengakuan
+                  Iman GSJA</a>
+              </li>
+              <li>
+                <a class="dropdown-item {{ 'activeDrop' if (title=='struktur_organisasi')}}"
+                  href="/struktur_organisasi">Struktur Organisasi</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item {{ 'activeDrop' if (title=='sejarah_gereja')}}" href="/sejarah_gereja">Sejarah
+                  Gereja</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ 'active' if (title=='blog')}}" href="/blog">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ 'active' if (title=='kegiatan')}}" href="/kegiatan">Kegiatan</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ 'active' if (title=='galeri')}}" href="/galeri">Galeri</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ 'active' if (title=='download')}}" href="/download">Download</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ 'active' if (title=='alkitab')}}" href="/alkitab">Alkitab</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ 'active' if (title=='kontak')}}" href="/kontak">Hubungi Kami</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</html>

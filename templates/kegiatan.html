@@ -1,0 +1,71 @@
+{% include "separate/header.html" %}
+
+<div class="content pt-5 pb-5 ps-3 pe-3 bg-light-dark">
+  <!-- Image Slider -->
+  <div class="image-slider bg-body infobox">
+    <div class="text-center">
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators infobox bg-body">
+          {%for i in carousel%}
+          <img id="{{carousel.index(i)}}" src="static/images/activity/{{i}}" alt=""
+            data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{carousel.index(i)}}"
+            class="indikator {{ 'active' if (carousel.index(i)==0)}}" aria-label="Slide {{(carousel.index(i)+1)}}"
+            autofocus />
+          {%endfor%}
+        </div>
+        <div class="carousel-inner">
+          {%for i in carousel%}
+          <div class="carousel-item {{ 'active' if (carousel.index(i)==0)}}">
+            <img src="static/images/activity/{{i}}" class="d-block w-100" alt="..." style="border-radius: 15px" />
+          </div>
+          {%endfor%}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Image Slider -->
+  <div class="content" style="margin-top: 17%">
+    <div class="jadwal bg-body infobox" style="overflow-x: scroll;">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Kegiatan</th>
+            <th>Hari</th>
+            <th>Waktu (WIB)</th>
+            <th>Tempat</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%for i in jadwal%}
+          <tr>
+            <td>
+              <p>{{i[1]}}</p>
+            </td>
+            <td>
+              <p>{{i[2]}}</p>
+            </td>
+            <td>
+              <p>{{i[3]}}</p>
+            </td>
+            <td>
+              <p>{{i[4]}}</p>
+            </td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% include "separate/footer.html" %}

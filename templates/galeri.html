@@ -1,0 +1,57 @@
+{% include "separate/header.html" %}
+
+<div class="content bg-light-dark pt-4">
+  <main class="cd__main">
+    <!-- Start DEMO HTML (Use the following code into your project)-->
+    <main class="main">
+      <div class="container">
+        {%for res in result%}
+        <div class="card">
+          <div class="card-image">
+            <a
+              href="/static/images/gallery/{{res[2]}}"
+              data-fancybox="gallery"
+              data-caption="[{{res[3].strftime('%d-%m-%Y')}}] {{res[1]}}"
+            >
+              <img
+                src="/static/images/gallery/{{res[2]}}"
+                alt="Image Gallery"
+              />
+            </a>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+    </main>
+  </main>
+  {%if total_page >1%}
+  <nav aria-label="Page navigation example">
+    <ul id="pagingDiv" class="pb-5 pagination justify-content-center"></ul>
+  </nav>
+  {%endif%}
+</div>
+<script>
+  $(document).ready(function () {
+    var result = Paging(
+      "{{part}}",
+      "{{per_page}}",
+      "{{total_records}}",
+      "myClass",
+      "disabled"
+    );
+    $("#pagingDiv").html(result);
+  });
+
+  $("#pagingDiv").on("click", "a", function () {
+    var result = Paging(
+      $(this).attr("pn"),
+      "{{per_page}}",
+      "{{total_records}}",
+      "myClass",
+      "disabled"
+    );
+    window.location.href =
+      "{{url_for(request.endpoint)}}" + "/" + $(this).attr("pn");
+  });
+</script>
+{% include "separate/footer.html" %}

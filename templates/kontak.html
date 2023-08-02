@@ -1,0 +1,54 @@
+{% include "separate/header.html" %}
+
+<div class="content bg-light-dark pt-3 pb-5">
+  <div class="green-contact-form p-2 m-3 bg-white bg-body infobox">
+    <div class="title-form mb-5">
+      <h3>Hubungi Kami</h3>
+      <p>Kirim masukan dan saran Anda, melalui formulir dibawah.</p>
+    </div>
+
+    <div class="form-box">
+      <div>
+        <fieldset class="form-group">
+          <label for="Full_Name">Nama Lengkap (Wajib Diisi)</label>
+          <input type="text" class="form-control" id="Full_Name" required />
+        </fieldset>
+
+        <fieldset class="form-group">
+          <label for="Email">Email (Wajib Diisi)</label>
+          <input type="email" class="form-control" id="Email" required />
+        </fieldset>
+
+        <fieldset class="form-group">
+          <label for="Email">Pesan Anda (Wajib Diisi)</label>
+          <textarea id="Message" class="form-control" rows="6"></textarea>
+        </fieldset>
+        <div style="display: flex">
+          <button type="submit" class="btn btn-secondary mt-1" id="Kirim_Pesan">
+            Kirim
+          </button>
+          <div id="spinner-kontak" class="first ms-1 mt-2" style="display: none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="notif-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="notif-modal-title"></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="notif-modal-body"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include "separate/footer.html" %}

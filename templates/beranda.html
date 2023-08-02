@@ -1,0 +1,24 @@
+{% include "separate/header.html" %}
+
+<div class="content bg-light-dark">
+  <div id="carouselExampleFade" class="carousel slide carousel-fade pe-5 ps-5 py-5" data-bs-ride="carousel">
+    <div class="carousel-inner bg-body infobox">
+      {%for i in carousel%}
+      <div class="carousel-item {{ 'active' if (carousel.index(i)==0)}}">
+        <img src="{{i}}" class="d-block w-100" alt="..." />
+      </div>
+      {%endfor%}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <h1 class="motto pb-5">"Cinta Tuhan, Rendah Hati, Jujur dan Rajin"</h1>
+</div>
+
+{% include "separate/footer.html" %}

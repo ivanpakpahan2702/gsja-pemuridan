@@ -1,0 +1,49 @@
+{% include "separate/header.html" %}
+
+<div class="content bg-light-dark">
+  <div class="container">
+    <div class="row">
+      {%for data in result%}
+      <div class="col-md-6">
+        <div class="box m-5 p-5 bg-body infobox">
+          <h4>{{data[1]}}</h4>
+          <small>tanggal upload : {{data[3].strftime('%d-%m-%Y')}}</small>
+          <small>ukuran : {{list_file_size[(loop.index)-1]}} KB</small>
+
+          ><a href="/static/downloads/{{data[2]}}"><i class="fa-solid fa-download"></i></a>
+        </div>
+      </div>
+      {%endfor%}
+    </div>
+  </div>
+  {%if total_page >1%}
+  <nav aria-label="Page navigation example">
+    <ul id="pagingDiv" class="pb-5 pagination justify-content-center"></ul>
+  </nav>
+  {%endif%}
+</div>
+<script>
+  $(document).ready(function () {
+    var result = Paging(
+      "{{part}}",
+      "{{per_page}}",
+      "{{total_records}}",
+      "myClass",
+      "disabled"
+    );
+    $("#pagingDiv").html(result);
+  });
+
+  $("#pagingDiv").on("click", "a", function () {
+    var result = Paging(
+      $(this).attr("pn"),
+      "{{per_page}}",
+      "{{total_records}}",
+      "myClass",
+      "disabled"
+    );
+    window.location.href =
+      "{{url_for(request.endpoint)}}" + "/" + $(this).attr("pn");
+  });
+</script>
+{% include "separate/footer.html" %}

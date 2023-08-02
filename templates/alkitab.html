@@ -1,0 +1,163 @@
+{% include "separate/header.html" %}
+
+<div class="content bg-light-dark">
+  <h1 class="text-center pt-5">
+    <img src="/static/images/logo/bible.png" alt="" style="width: 10%" />
+  </h1>
+  <h6>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <select id="kitab_field" class="form-select bg-body infobox m-1" name="kitab_field"
+            aria-label="Default select example">
+            <option disabled>===Perjanjian Lama===</option>
+            {%for data in data_bible%} {%if data[0]=='Matius'%}
+            <option disabled>===Perjanjian Baru===</option>
+            {%endif%}
+            <option value="{{data[1]}}">{{data[0]}}</option>
+            {%endfor%}
+          </select>
+        </div>
+        <div class="col-md-4">
+          <input type="number" id="pasal_input_field" name="pasal_search_verse" class="m-1 form-control bg-body infobox"
+            min="1" placeholder="pasal (contoh: 1)" />
+        </div>
+        <div class="col-md-4">
+          <input type="text" id="ayat_input_field" name="ayat_search_verse" class="m-1 form-control bg-body infobox"
+            placeholder="1 ayat (1), 2 ayat (1-5)" />
+        </div>
+        <div class="text-center">
+          <button class="mt-5 btn btn-secondary" type="button" id="search_verse" style="width: 15%">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </h6>
+  <br />
+  <div class="m-5" style="color: white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p>Daftar Kitab</p>
+          <div class="row">
+            <div class="col-md">
+              <p>Perjanjian Lama</p>
+              <ul>
+                <div class="row">
+                  <div class="col-sm">
+                    <li>Kejadian</li>
+                    <li>Keluaran</li>
+                    <li>Imamat</li>
+                    <li>Bilangan</li>
+                    <li>Ulangan</li>
+                    <li>Yosua</li>
+                    <li>Hakim-hakim</li>
+                    <li>Rut</li>
+                    <li>1 Samuel</li>
+                    <li>2 Samuel</li>
+                    <li>1 Raja-raja</li>
+                    <li>2 Raja-raja</li>
+                    <li>1 Tawarikh</li>
+                    <li>2 Tawarikh</li>
+                  </div>
+                  <div class="col-sm">
+                    <li>Ezra</li>
+                    <li>Nehemia</li>
+                    <li>Ester</li>
+                    <li>Ayub</li>
+                    <li>Mazmur</li>
+                    <li>Amsal</li>
+                    <li>Pengkhotbah</li>
+                    <li>Kidung Agung</li>
+                    <li>Yesaya</li>
+                    <li>Yeremia</li>
+                    <li>Ratapan</li>
+                    <li>Yehezkiel</li>
+                    <li>Daniel</li>
+                  </div>
+                  <div class="col-sm">
+                    <li>Hosea</li>
+                    <li>Yoel</li>
+                    <li>Amos</li>
+                    <li>Obaja</li>
+                    <li>Yunus</li>
+                    <li>Mikha</li>
+                    <li>Nahum</li>
+                    <li>Habakuk</li>
+                    <li>Zefanya</li>
+                    <li>Hagai</li>
+                    <li>Zakharia</li>
+                    <li>Maleakhi</li>
+                  </div>
+                </div>
+              </ul>
+            </div>
+            <div class="col-md">
+              <p>Perjanjian Baru</p>
+              <ul>
+                <div class="row">
+                  <div class="col-sm">
+                    <li>Matius</li>
+                    <li>Markus</li>
+                    <li>Lukas</li>
+                    <li>Yohanes</li>
+                    <li>Kisah Para Rasul</li>
+                    <li>Roma</li>
+                    <li>1 Korintus</li>
+                    <li>2 Korintus</li>
+                    <li>Galatia</li>
+                    <li>Efesus</li>
+                  </div>
+                  <div class="col-sm">
+                    <li>Filipi</li>
+                    <li>Kolose</li>
+                    <li>1 Tesalonika</li>
+                    <li>2 Tesalonika</li>
+                    <li>1 Timotius</li>
+                    <li>2 Timotis</li>
+                    <li>Titus</li>
+                    <li>Filemon</li>
+                    <li>Ibrani</li>
+                    <li>Yakobus</li>
+                  </div>
+                  <div class="col-sm">
+                    <li>1 Petrus</li>
+                    <li>2 Petrus</li>
+                    <li>1 Yohanes</li>
+                    <li>2 Yohanes</li>
+                    <li>3 Yohanes</li>
+                    <li>Yudas</li>
+                    <li>Wahyu</li>
+                  </div>
+                </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="bibleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="bibleModalTitle"></h5>
+          <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+        </div>
+        <div class="modal-body" id="bibleModalBody">
+          <div id="spinner-kontak" class="first ms-1 mt-2" style="display: none"> Menunggu ...</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/static/assets/js/alkitab/alkitab.js"></script>
+</div>
+
+{% include "separate/footer.html" %}

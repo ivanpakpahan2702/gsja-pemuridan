@@ -1,0 +1,91 @@
+{% include "separate/header.html" %}
+
+<div class="content bg-light-dark">
+  <div class="p-5" style="overflow: auto">
+    {% for data in result%}
+    <div style="color: white">
+      <small style="display: none" id="spawn-identity">{{data[0]}}</small>
+      <small>Diupload Pada: {{data[5].strftime('%d-%m-%Y %H:%M:%S')}}</small>
+      <small>, Oleh {{data[6]}}</small>
+      <small>, Pada {{category[0][1]}}</small>
+      <small>, {{count_comment}} <i class="fa fa-comment"></i></small>
+    </div>
+    <div class="shadow-lg p-2 mb-2 bg-body rounded">{{data[4]|safe}}</div>
+    <script>
+      var id_blog = "{{data[0]}}";
+    </script>
+    {%endfor%}
+  </div>
+
+  <div class="m-5">
+    <h5 class="text-Left" style="font-weight: bold; color: white">Tanggapan</h5>
+    <div class="shadow-lg p-2 mb-5 bg-body rounded">
+      {%if count_comment==0%}
+      <p class="text-center">Belum Ada Yang Menanggapi.</p>
+      {%else%} {% for comment in comments%}
+      <div class="p-2 m-1 border" style="overflow: auto">
+        <small><i class="fa fa-user"></i> {{comment[1]}}</small><br />
+        <small>Tanggal : {{comment[3].strftime('%d-%m-%Y %H:%M:%S')}}</small>
+        <p>{{comment[4]|safe}}</p>
+      </div>
+      {%endfor%} {%endif%}
+      <h5 class="text-Left" style="font-weight: bold">Berikan Tanggapan</h5>
+      <div>
+        <input type="text" name="comment-author" id="comment-author" placeholder="Masukkan Nama Anda"
+          class="form-control" />
+        <textarea name="comment" id="comment-editor" cols="30" rows="10"></textarea>
+        <div style="display: flex">
+          <button class="btn btn-secondary m-1" id="send-comment" name="send-comment">
+            Kirim
+          </button>
+          <div id="spinner-kontak" class="first ms-1 mt-2" style="display: none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="komen-notif-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="komen-notif-modal-title"></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="komen-notif-modal-body"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  let ckeditor;
+  ClassicEditor.create(document.querySelector("#comment-editor"), {
+    // plugins: [ Font ],
+    // toolbar: [ 'fontColor' ], // uncommenting this breaks things and throws toolbarview-item-unavailable error
+    toolbar: [
+      "bold",
+      "italic",
+      "underline",
+      "bulletedList",
+      "numberedList",
+      "link",
+      "blockQuote",
+      "images",
+    ],
+  })
+    .then((editor) => {
+      // console.log(Array.from(
+      //   editor.ui.componentFactory.names()
+      // ));
+      ckeditor = editor;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+</script>
+
+{% include "separate/footer.html" %}
